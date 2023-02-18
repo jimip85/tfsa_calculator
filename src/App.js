@@ -83,7 +83,6 @@ function App() {
     filterLimit.forEach(item => {sum += item.limit});
     setLimit(sum);
 
-
   }
 
   let reload = () => {

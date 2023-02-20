@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 
-
 const tfsaArray = [
   {
     "year": 2009,
@@ -66,22 +65,36 @@ const tfsaArray = [
 ];
 
 
-
 function App() {
 
-  //state
+  //defining states
   const [dob, setDob] = useState(0);
   const [principle, setPrinciple] = useState(0);
   const [limit, setLimit] = useState('');
-  const [message, setMessage] = useState('');
 
   let calcTfsa = (event) => {
     event.preventDefault()
 
+    let today = new Date().getFullYear();
+    let birthYear = new Date(dob).getFullYear();
+    let diff = today - birthYear;
+
     let sum = 0;
-    const filterLimit = tfsaArray.filter(item => { return item.year <= dob});
-    filterLimit.forEach(item => {sum += item.limit});
-    setLimit(sum);
+
+    if (diff < 18) {
+      alert("You are under the legal age to contribute to the TFSA program");
+    } else {
+      const filterLimit = tfsaArray.filter(item => { return item.year >= birthYear + 18 });
+      filterLimit.forEach(item => { sum += item.limit });
+      sum -= principle;
+      if (sum < 0) {
+        setLimit(sum);
+        alert("You've over contributed... Please contact CRA!")
+      } else {
+        setLimit(sum);
+      }
+    };
+
 
   }
 
@@ -89,33 +102,31 @@ function App() {
     window.location.reload()
   }
 
-
-
-
   return (
-    <div className="text-3xl p-2">
-      <div className="container">
-        <h2 className='center text-blue-300 text-3xl' >TFSA Calculator</h2>
-        <form>
-          <div>
-            <label>Birth Year</label>
-            <input className="border-2" value={dob} onChange={(event) => setDob(event.target.value)} />
-          </div>
-          <div>
-            <label>Priciple Contributed</label>
-            <input className="border-2" value={principle} onChange={(event) => setPrinciple(event.target.value)} />
-          </div>
-          <div className="space-x-3">
-            <button className='btn' onClick={calcTfsa} type='submit'>Submit</button>
-            <button className='btn btn-outline' onClick={reload} type='submit'>Reset</button>
-          </div>
-        </form>
-        <div className='Center'></div>
-        <h3>Your Contribution Limit is: {limit}</h3>
-        <p>{message}</p>
+    <div>
+      <div className="text-3xl p-2">
+        <div className="container">
+          <h2 className='center text-blue-300 text-3xl' >TFSA Calculator</h2>
+          <form>
+            <div>
+              <label>Birth Year</label>
+              <input className="border-2" type='date' value={dob} onChange={(event) => setDob(event.target.value)} />
+            </div>
+            <div>
+              <label>Priciple Contributed</label>
+              <input className="border-2" value={principle} onChange={(event) => setPrinciple(event.target.value)} />
+            </div>
+            <div className="space-x-3">
+              <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={calcTfsa} type='submit'>Submit</button>
+              <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={reload} type='submit'>Reset</button>
+            </div>
+          </form>
+          <div className='Center'></div>
+          <h3>Your Contribution Limit is: {limit}</h3>
+          <p></p>
+        </div>
       </div>
     </div>
-
   );
 }
 

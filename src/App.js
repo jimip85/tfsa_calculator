@@ -99,9 +99,7 @@ function App() {
   };
 
   return (
-      <div>
-      <div className="bg-cover bg-center" style={{ backgroundImage:"url(toronto_background.jpg)", height:"100%", width:"100%"}}></div>
-      <div class="container w-3/12 my-24 mx-auto space-y-6 rounded-md shadow-2xl bg-gradient-to-r from-slate-100 p-3 border-2 text-center">
+      <div class="container max-w-lg my-24 mx-auto space-y-6 rounded-md shadow-2xl bg-gradient-to-r from-slate-100 p-3 border-2 text-center">
         <h1 className='text-3xl font-bold my-6'>TFSA Calculator</h1>
         <form className="space-y-6 text-2xl">
           <div className="grid space-x-3 space-y-2 mx-4">
@@ -118,9 +116,8 @@ function App() {
           </div>
         </form>
         <h2 className="text-2xl">Your Contribution Limit is:</h2>
-        <h3 className="opacity-75 grid text-3xl rounded bg-slate-300 w-3/6 bg-center mx-auto h-24 place-content-center drop-shadow-xl">{limit}</h3>
+        <h3 className="opacity-75 grid text-3xl rounded w-3/6 bg-center mx-auto h-24 place-content-center drop-shadow-xl">{limit}</h3>
       </div>
-    </div>
   );
 }
 

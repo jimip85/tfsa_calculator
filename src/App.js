@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 const tfsaArray = [
   {
     "year": 2009,
@@ -64,7 +63,6 @@ const tfsaArray = [
   },
 ];
 
-
 function App() {
 
   //defining states
@@ -78,7 +76,6 @@ function App() {
     let today = new Date().getFullYear();
     let birthYear = new Date(dob).getFullYear();
     let diff = today - birthYear;
-
     let sum = 0;
 
     if (diff < 18) {
@@ -95,36 +92,33 @@ function App() {
       }
     };
 
-
   }
 
   let reload = () => {
     window.location.reload()
-  }
+  };
 
   return (
-    <div>
-      <div className="text-3xl p-2">
-        <div className="container">
-          <h2 className='center text-blue-300 text-3xl' >TFSA Calculator</h2>
-          <form>
-            <div>
-              <label>Birth Year</label>
-              <input className="border-2" type='date' value={dob} onChange={(event) => setDob(event.target.value)} />
-            </div>
-            <div>
-              <label>Priciple Contributed</label>
-              <input className="border-2" value={principle} onChange={(event) => setPrinciple(event.target.value)} />
-            </div>
-            <div className="space-x-3">
-              <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={calcTfsa} type='submit'>Submit</button>
-              <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={reload} type='submit'>Reset</button>
-            </div>
-          </form>
-          <div className='Center'></div>
-          <h3>Your Contribution Limit is: {limit}</h3>
-          <p></p>
-        </div>
+      <div>
+      <div className="bg-cover bg-center" style={{ backgroundImage:"url(toronto_background.jpg)", height:"100%", width:"100%"}}></div>
+      <div class="container w-3/12 my-24 mx-auto space-y-6 rounded-md shadow-2xl bg-gradient-to-r from-slate-100 p-3 border-2 text-center">
+        <h1 className='text-3xl font-bold my-6'>TFSA Calculator</h1>
+        <form className="space-y-6 text-2xl">
+          <div className="grid space-x-3 space-y-2 mx-4">
+            <label className="ml-3 font-semibold text-left">Birthday:</label>
+            <input className="border-black border-2 rounded-md" type='date' value={dob} onChange={(event) => setDob(event.target.value)} />
+          </div>
+          <div className="grid space-x-3 space-y-2 mx-4">
+            <label className="ml-3 font-semibold text-left">Principle Contributed:</label>
+            <input className="border-black border-2 rounded-md" value={principle} onChange={(event) => setPrinciple(event.target.value)} />
+          </div>
+          <div className="space-x-5">
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-2xl' onClick={calcTfsa} type='submit'>Submit</button>
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-2xl' onClick={reload} type='submit'>Reset</button>
+          </div>
+        </form>
+        <h2 className="text-2xl">Your Contribution Limit is:</h2>
+        <h3 className="opacity-75 grid text-3xl rounded bg-slate-300 w-3/6 bg-center mx-auto h-24 place-content-center drop-shadow-xl">{limit}</h3>
       </div>
     </div>
   );

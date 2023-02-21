@@ -70,7 +70,7 @@ function App() {
   const [principle, setPrinciple] = useState(0);
   const [limit, setLimit] = useState('');
 
-  let calcTfsa = (event) => {
+  const calcTfsa = (event) => {
     event.preventDefault()
 
     let today = new Date().getFullYear();

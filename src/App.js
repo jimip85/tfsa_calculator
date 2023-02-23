@@ -66,7 +66,7 @@ const tfsaArray = [
 function App() {
 
   //defining states
-  const [dob, setDob] = useState(0);
+  const [dob, setDob] = useState('');
   const [principle, setPrinciple] = useState(0);
   const [limit, setLimit] = useState('');
 
@@ -82,7 +82,7 @@ function App() {
       alert("You are under the legal age to contribute to the TFSA program");
     } else {
       const filterLimit = tfsaArray.filter(item => { return item.year >= birthYear + 18 });
-      filterLimit.forEach(item => { sum += item.limit });
+      sum = filterLimit.reduce((accumulator, currentValue) => accumulator + currentValue.limit, 0);
       sum -= principle;
       if (sum < 0) {
         setLimit(sum);
@@ -95,7 +95,9 @@ function App() {
   }
 
   let reload = () => {
-    window.location.reload()
+    // window.location.reload()
+    setDob('');
+    setPrinciple(0);
   };
 
   return (

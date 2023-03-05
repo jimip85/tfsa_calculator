@@ -79,7 +79,7 @@ function App() {
     let sum = 0;
     
     //calculation logic
-    if (dob == "") {
+    if (dob === "") {
       alert("Please enter a valid date.");
     } else if (diff < 18) {
       alert("You're younger than the legal TFSA contribution age limit!");
